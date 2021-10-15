@@ -1,0 +1,19 @@
+{
+  "name": "oh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "oh": "./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-opn": "^3.0.0",
+    "cli-table": "^0.3.6",
+    "commander": "^8.2.0",
+    "open": "^8.2.1",
+    "shelljs": "^0.8.4"
+  }
+}
