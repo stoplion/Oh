@@ -1,14 +1,19 @@
 {
-  "name": "oh",
+  "name": "@stoplion/oh",
   "version": "1.0.0",
-  "description": "",
+  "description": "Command Line Bookmarking",
   "main": "index.js",
   "bin": {
     "oh": "./index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "bookmarking",
+    "bookmarks",
+    "commandline",
+    "cli"
+  ],
+  "author": "georgenorris",
+  "license": "MIT",
   "dependencies": {
     "better-opn": "^3.0.0",
     "cli-table": "^0.3.6",

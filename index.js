@@ -7,7 +7,7 @@ const path = require('path');
 const opn = require('better-opn');
 const Table = require('cli-table');
 
-const RC_PATH = path.join(process.env.HOME, '.oclirc');
+const RC_PATH = path.join(process.env.HOME, '.ohrc');
 
 function rmEntry(alias) {
   const rcEntries = getEntries();
@@ -127,7 +127,7 @@ program
   .action(() => {
     shell.touch(RC_PATH);
     shell.exec(`echo [] >> ${RC_PATH}`);
-    console.log(`.oclirc file inited at ${RC_PATH}`);
+    console.log(`.ohrc file inited at ${RC_PATH}`);
   });
 
 program

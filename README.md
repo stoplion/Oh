@@ -1,3 +1,8 @@
+# Command Line Bookmarking
+
+## Start using this thing
+```oh init```
+
 # Install
 Make the command globally available
 ```
