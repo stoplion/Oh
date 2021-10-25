@@ -1,11 +1,13 @@
 # Command Line Bookmarking
 
--------
+[![Image from Gyazo](https://i.gyazo.com/02ce5034be5bce22c096387bc2480ed4.gif)](https://gyazo.com/02ce5034be5bce22c096387bc2480ed4)
+
+---
 
 ## Start using this thing
 
 ```
-// Kick it out by initializing
+// Kick it off by initializing
 
 $ oh init
 ```
@@ -67,20 +69,20 @@ $ oh tag red reading news
 │ trel  │ https://trello.com/           │               │
 └───────┴───────────────────────────────┴───────────────┘
 ```
------
 
+---
 
 ## Features coming soon
+
 - Filter search by tag
 - Open with other browsers
 - Open with incognito
 - Open with different profiles
 - Interactive modes
 
-
 # Made with opensource
+
 - [Commander](https://www.npmjs.com/package/commander)
 - [Shelljs](https://www.npmjs.com/package/shelljs)
 - [Better-Opn](https://www.npmjs.com/package/better-opn)
 - [Cli-Table](https://www.npmjs.com/package/cli-table)
-
