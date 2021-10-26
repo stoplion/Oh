@@ -22,7 +22,7 @@ function addNewEntry(alias, url) {
   const entry = {
     alias,
     url,
-    tags: []
+    tags: [],
   };
 
   const rcEntries = getEntries();
@@ -47,15 +47,14 @@ function updateEntry(alias, key, value) {
     if (entry.alias == alias) {
       return {
         ...entry,
-        [key]: value
-      }
+        [key]: value,
+      };
     }
     return entry;
   });
 
   fs.writeFileSync(RC_PATH, JSON.stringify(updatedEntries));
 }
-
 
 function getEntries() {
   const fileStr = fs.readFileSync(RC_PATH, 'utf8');
@@ -77,21 +76,18 @@ function findEntry(alias) {
 
 function tagEntry(alias, tags = []) {
   const entry = findEntry(alias);
-  const newTags = [
-    ...entry.tags,
-    ...tags
-  ]
+  const newTags = [...entry.tags, ...tags];
 
-  updateEntry(alias, 'tags', newTags)
+  updateEntry(alias, 'tags', newTags);
 }
 
 function untagEntry(alias, tag) {
   const entry = findEntry(alias);
-  const newTags = entry.tags.filter(entry => {
-    return entry !== tag
-  })
+  const newTags = entry.tags.filter((entry) => {
+    return entry !== tag;
+  });
 
-  updateEntry(alias, 'tags', newTags)
+  updateEntry(alias, 'tags', newTags);
 }
 
 program
@@ -102,9 +98,7 @@ program
   .argument('<tags...>')
   .action((alias, tags) => {
     tagEntry(alias, tags);
-    console.log(
-      `${alias} updated with tags: ${tags.join(', ')}`
-    )
+    console.log(`${alias} updated with tags: ${tags.join(', ')}`);
   });
 
 program
@@ -115,9 +109,7 @@ program
   .argument('<tag>')
   .action((alias, tag) => {
     untagEntry(alias, tag);
-    console.log(
-      `${tag} removed from alias: ${alias}.`
-    )
+    console.log(`${tag} removed from alias: ${alias}.`);
   });
 
 program
