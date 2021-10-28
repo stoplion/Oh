@@ -76,9 +76,11 @@ function findEntry(alias) {
 }
 
 function lsEntries() {
-  const rcEntries = getEntries();
+  tableLogEntries(getEntries());
+}
 
-  const formattedEntries = rcEntries.map((entry) => {
+function tableLogEntries(entries) {
+  const formattedEntries = entries.map((entry) => {
     return [entry.alias, entry.url, entry.tags.join(', ')];
   });
 
@@ -105,6 +107,27 @@ function untagEntry(alias, tag) {
   });
 
   updateEntry(alias, 'tags', newTags);
+}
+
+function search(keyword, opts) {
+  let foundEntries = [];
+
+  if (opts.tags) {
+    // oh s -t work reading
+    // @TODO handle multile tags
+    foundEntries = getEntries().filter((entry) => {
+      const entriesTags = entry.tags;
+      return entry.tags.includes(keyword);
+    });
+
+    const table = new Table({
+      head: ['alias', 'url', 'tags'],
+    });
+
+    tableLogEntries(foundEntries);
+  } else {
+    // @TODO search by alias or url
+  }
 }
 
 function lsTags(opts) {
@@ -157,6 +180,16 @@ program
   .description('List all tags')
   .action((opts) => {
     getAllTags(opts);
+  });
+
+program
+  .version('0.1.0')
+  .command('search')
+  .argument('<keyword>')
+  .option('-t, --tags', 'Only list tags')
+  .description('Search for an entry')
+  .action((keyword, tags) => {
+    search(keyword, tags);
   });
 
 program
