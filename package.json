@@ -1,6 +1,6 @@
 {
   "name": "@stoplion/oh",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Command Line Bookmarking",
   "main": "index.js",
   "homepage": "https://github.com/stoplion/Oh",
