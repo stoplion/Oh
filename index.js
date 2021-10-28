@@ -178,8 +178,8 @@ program
   .version('0.1.0')
   .command('tags')
   .description('List all tags')
-  .action((opts) => {
-    getAllTags(opts);
+  .action(() => {
+    lsTags();
   });
 
 program
@@ -205,14 +205,9 @@ program
 program
   .version('0.1.0')
   .command('ls')
-  .option('-t, --tags', 'Only list tags')
   .description('List all entries')
   .action((opts) => {
-    if (opts.tags) {
-      lsTags();
-    } else {
-      lsEntries();
-    }
+    lsEntries();
   });
 
 program

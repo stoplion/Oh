@@ -2,7 +2,9 @@
 
 [![Image from Gyazo](https://i.gyazo.com/02ce5034be5bce22c096387bc2480ed4.gif)](https://gyazo.com/02ce5034be5bce22c096387bc2480ed4)
 
-[![Image from Gyazo](https://i.gyazo.com/27ea0ab27d2eb333465db2debf33e669.gif)](https://gyazo.com/27ea0ab27d2eb333465db2debf33e669)
+[![Image from Gyazo](https://i.gyazo.com/fd04fd72ecfcbf24b97a27f129f604dd.gif)](https://gyazo.com/fd04fd72ecfcbf24b97a27f129f604dd)
+
+[![Image from Gyazo](https://i.gyazo.com/1f09523feb53fed222568b6c0e4a578c.gif)](https://gyazo.com/1f09523feb53fed222568b6c0e4a578c)
 
 ---
 
