@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const opn = require('better-opn');
 const Table = require('cli-table');
+const _ = require('lodash');
 
 const RC_PATH = path.join(process.env.HOME, '.ohrc');
 
@@ -74,6 +75,22 @@ function findEntry(alias) {
   }
 }
 
+function lsEntries() {
+  const rcEntries = getEntries();
+
+  const formattedEntries = rcEntries.map((entry) => {
+    return [entry.alias, entry.url, entry.tags.join(', ')];
+  });
+
+  const table = new Table({
+    head: ['alias', 'url', 'tags'],
+  });
+
+  table.push(...formattedEntries);
+
+  shell.echo(table.toString());
+}
+
 function tagEntry(alias, tags = []) {
   const entry = findEntry(alias);
   const newTags = [...entry.tags, ...tags];
@@ -88,6 +105,28 @@ function untagEntry(alias, tag) {
   });
 
   updateEntry(alias, 'tags', newTags);
+}
+
+function lsTags(opts) {
+  const rcEntries = getEntries().reduce(
+    (memo, entry) => [...memo, ...entry.tags],
+    []
+  );
+
+  const allTags = _.entries(_.countBy(rcEntries)).map(([name, count]) => [
+    name,
+    count,
+  ]);
+
+  const table = new Table({
+    head: ['tags', 'count'],
+  });
+
+  allTags.forEach((tagTuple) => {
+    table.push(tagTuple);
+  });
+
+  shell.echo(table.toString());
 }
 
 program
@@ -114,6 +153,14 @@ program
 
 program
   .version('0.1.0')
+  .command('tags')
+  .description('List all tags')
+  .action((opts) => {
+    getAllTags(opts);
+  });
+
+program
+  .version('0.1.0')
   .command('init')
   .description('Init rc file in ~')
   .action(() => {
@@ -125,21 +172,14 @@ program
 program
   .version('0.1.0')
   .command('ls')
+  .option('-t, --tags', 'Only list tags')
   .description('List all entries')
-  .action(() => {
-    const rcEntries = getEntries();
-
-    const formattedEntries = rcEntries.map((entry) => {
-      return [entry.alias, entry.url, entry.tags.join(', ')];
-    });
-
-    const table = new Table({
-      head: ['alias', 'url', 'tags'],
-    });
-
-    table.push(...formattedEntries);
-
-    shell.echo(table.toString());
+  .action((opts) => {
+    if (opts.tags) {
+      lsTags();
+    } else {
+      lsEntries();
+    }
   });
 
 program
