@@ -4,7 +4,7 @@ import { getEntries } from './utils.js';
 import isUrl from 'is-url';
 import prependHTTP from 'prepend-http';
 
-export function addNewEntry(alias, url) {
+export function addNewEntry(alias, url, tags) {
   if (!isUrl(prependHTTP(url))) {
     console.log(`Not an URL: ${url}`);
     return;
@@ -13,7 +13,7 @@ export function addNewEntry(alias, url) {
   const entry = {
     alias: alias,
     url: prependHTTP(url),
-    tags: [],
+    tags,
   };
 
   const rcEntries = getEntries();

@@ -77,8 +77,9 @@ program
   .description('Add an entry')
   .argument('<alias>')
   .argument('<url>')
-  .action((alias, url) => {
-    addNewEntry(alias, url);
+  .option('-t, --tags [tags...]', 'Tag an entry')
+  .action((alias, url, opts) => {
+    addNewEntry(alias, url, opts.tags);
   });
 
 program
