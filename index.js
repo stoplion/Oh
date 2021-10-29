@@ -1,159 +1,16 @@
 #!/usr/bin/env node
 
-import Table from 'cli-table';
-import _ from 'lodash';
-import fs from 'fs';
-import isUrl from 'is-url';
+import { RC_PATH } from './constants.js';
+import { addNewEntry } from './functions/addNewEntry.js';
+import { lsEntries } from './functions/lsEntries.js';
+import { lsTags } from './functions/lsTags.js';
 import opn from 'better-opn';
-import path from 'path';
-import prependHTTP from 'prepend-http';
 import { program } from 'commander';
+import { rmEntry } from './functions/rmEntry.js';
+import { search } from './functions/search.js';
 import shell from 'shelljs';
-
-const RC_PATH = path.join(process.env.HOME, '.ohrc');
-
-function rmEntry(alias) {
-  const rcEntries = getEntries();
-
-  const updatedEntries = rcEntries.filter((entry) => entry.alias !== alias);
-
-  fs.writeFileSync(RC_PATH, JSON.stringify(updatedEntries));
-  console.log(`Entry ${alias} removed`);
-}
-
-function addNewEntry(alias, url) {
-  if (!isUrl(prependHTTP(url))) {
-    console.log(`Not an URL: ${url}`);
-    return;
-  }
-
-  const entry = {
-    alias: alias,
-    url: prependHTTP(url),
-    tags: [],
-  };
-
-  const rcEntries = getEntries();
-
-  const match = rcEntries.find((entry) => entry.alias === alias);
-
-  if (match) {
-    console.log(`Alias ${alias} has already been`);
-    return;
-  }
-
-  rcEntries.push(entry);
-
-  fs.writeFileSync(RC_PATH, JSON.stringify(rcEntries));
-  console.log(`
-    Added ${alias} entry pointing to ${url}.
-  `);
-}
-
-function updateEntry(alias, key, value) {
-  const updatedEntries = getEntries().map((entry) => {
-    if (entry.alias == alias) {
-      return {
-        ...entry,
-        [key]: value,
-      };
-    }
-    return entry;
-  });
-
-  fs.writeFileSync(RC_PATH, JSON.stringify(updatedEntries));
-}
-
-function getEntries() {
-  const fileStr = fs.readFileSync(RC_PATH, 'utf8');
-
-  const data = JSON.parse(fileStr);
-  return data;
-}
-
-function findEntry(alias) {
-  const rcEntries = getEntries();
-  const match = rcEntries.find((entry) => entry.alias === alias);
-
-  if (match) {
-    return match;
-  } else {
-    return false;
-  }
-}
-
-function lsEntries() {
-  tableLogEntries(getEntries());
-}
-
-function tableLogEntries(entries) {
-  const formattedEntries = entries.map((entry) => {
-    return [entry.alias, entry.url, entry.tags.join(', ')];
-  });
-
-  const table = new Table({
-    head: ['alias', 'url', 'tags'],
-  });
-
-  table.push(...formattedEntries);
-
-  shell.echo(table.toString());
-}
-
-function tagEntry(alias, tags = []) {
-  const entry = findEntry(alias);
-  const newTags = [...entry.tags, ...tags.map((tag) => tag.toLowerCase())];
-
-  updateEntry(alias, 'tags', newTags);
-}
-
-function untagEntry(alias, tag) {
-  const entry = findEntry(alias);
-  const newTags = entry.tags.filter((entry) => {
-    return entry !== tag;
-  });
-
-  updateEntry(alias, 'tags', newTags);
-}
-
-function search(keyword, opts) {
-  let foundEntries = [];
-
-  if (opts.tags) {
-    // oh s -t work reading
-    // @TODO handle multiple tags
-    foundEntries = getEntries().filter((entry) => {
-      const entriesTags = entry.tags;
-      return entry.tags.includes(keyword);
-    });
-
-    tableLogEntries(foundEntries);
-  } else {
-    // @TODO search by alias or url
-  }
-}
-
-function lsTags(opts) {
-  const rcEntries = getEntries().reduce(
-    (memo, entry) => [...memo, ...entry.tags],
-    []
-  );
-
-  const allTags = _.entries(_.countBy(rcEntries)).map(([name, count]) => [
-    name,
-    count,
-  ]);
-
-  const table = new Table({
-    head: ['tags', 'count'],
-  });
-
-  allTags.forEach((tagTuple) => {
-    table.push(tagTuple);
-  });
-
-  shell.echo(table.toString());
-}
+import { tagEntry } from './functions/tagEntry.js';
+import { untagEntry } from './functions/untagEntry.js';
 
 program
   .command('tag')
