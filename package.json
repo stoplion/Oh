@@ -14,14 +14,17 @@
     "commandline",
     "cli"
   ],
+  "type": "module",
   "author": "georgenorris",
   "license": "MIT",
   "dependencies": {
     "better-opn": "^3.0.0",
     "cli-table": "^0.3.6",
     "commander": "^8.2.0",
+    "is-url": "^1.2.4",
     "lodash": "^4.17.21",
     "open": "^8.2.1",
+    "prepend-http": "^4.0.0",
     "shelljs": "^0.8.4"
   }
 }

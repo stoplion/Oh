@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
-const { program } = require('commander');
-const shell = require('shelljs');
-const fs = require('fs');
-const path = require('path');
-const opn = require('better-opn');
-const Table = require('cli-table');
-const _ = require('lodash');
+import Table from 'cli-table';
+import _ from 'lodash';
+import fs from 'fs';
+import isUrl from 'is-url';
+import opn from 'better-opn';
+import path from 'path';
+import prependHTTP from 'prepend-http';
+import { program } from 'commander';
+import shell from 'shelljs';
 
 const RC_PATH = path.join(process.env.HOME, '.ohrc');
 
@@ -20,9 +22,14 @@ function rmEntry(alias) {
 }
 
 function addNewEntry(alias, url) {
+  if (!isUrl(prependHTTP(url))) {
+    console.log(`Not an URL: ${url}`);
+    return;
+  }
+
   const entry = {
-    alias,
-    url,
+    alias: alias,
+    url: prependHTTP(url),
     tags: [],
   };
 
@@ -95,7 +102,7 @@ function tableLogEntries(entries) {
 
 function tagEntry(alias, tags = []) {
   const entry = findEntry(alias);
-  const newTags = [...entry.tags, ...tags];
+  const newTags = [...entry.tags, ...tags.map((tag) => tag.toLowerCase())];
 
   updateEntry(alias, 'tags', newTags);
 }
@@ -156,7 +163,11 @@ program
   .argument('<tags...>')
   .action((alias, tags) => {
     tagEntry(alias, tags);
-    console.log(`${alias} updated with tags: ${tags.join(', ')}`);
+    console.log(
+      `${alias} updated with tags: ${tags
+        .map((tag) => tag.toLowerCase())
+        .join(', ')}`
+    );
   });
 
 program
