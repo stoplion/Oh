@@ -114,7 +114,7 @@ function search(keyword, opts) {
 
   if (opts.tags) {
     // oh s -t work reading
-    // @TODO handle multile tags
+    // @TODO handle multiple tags
     foundEntries = getEntries().filter((entry) => {
       const entriesTags = entry.tags;
       return entry.tags.includes(keyword);
@@ -122,12 +122,6 @@ function search(keyword, opts) {
 
     tableLogEntries(foundEntries);
   } else {
-    foundEntries = getEntries().filter((entry) => {
-      const entryAlias = entry.alias;
-      const entryUrl = entry.url;
-      if (entryUrl)
-      // entry.tags.includes(keyword);
-    });
     // @TODO search by alias or url
   }
 }

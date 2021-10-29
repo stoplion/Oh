@@ -28,7 +28,7 @@ $ oh add trel https://trello.com/
 ```
 
 ```
-// Forgot what you added? Use LS
+// Last all your bookmarks
 
 $ oh ls
 ┌───────┬───────────────────────────────┬──────┐
@@ -75,16 +75,45 @@ $ oh tag red reading news
 └───────┴───────────────────────────────┴───────────────┘
 ```
 
+```
+// List all tags
+
+$ oh tags
+
+┌─────────┬───────┐
+│ tags    │ count │
+├─────────┼───────┤
+│ reading │ 2     │
+├─────────┼───────┤
+│ news    │ 1     │
+└─────────┴───────┘
+```
+
+```
+// Search bookmarks by tags
+
+$  oh search -t news
+
+┌───────┬─────────────────────┬───────────────┐
+│ alias │ url                 │ tags          │
+├───────┼─────────────────────┼───────────────┤
+│ red   │ https://reddit.com/ │ reading, news │
+└───────┴─────────────────────┴───────────────┘
+
+```
+
 ---
 
 ## Features coming soon
 
+```
 - [x] Filter search by tag
 - [ ] Filter search by url and alias
 - [ ] Open with other browsers
 - [ ] Open with incognito
 - [ ] Open with different profiles
 - [ ] Autocomplete
+```
 
 # Made with opensource
 
