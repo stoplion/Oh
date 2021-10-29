@@ -149,8 +149,8 @@ function lsTags(opts) {
 }
 
 program
-  .version('0.1.0')
   .command('tag')
+  .alias('t')
   .description('Tag an entry')
   .argument('<alias>')
   .argument('<tags...>')
@@ -171,7 +171,6 @@ program
   });
 
 program
-  .version('0.1.0')
   .command('tags')
   .description('List all tags')
   .action(() => {
@@ -179,8 +178,8 @@ program
   });
 
 program
-  .version('0.1.0')
   .command('search')
+  .alias('s')
   .argument('<keyword>')
   .option('-t, --tags', 'Only list tags')
   .description('Search for an entry')
@@ -189,8 +188,8 @@ program
   });
 
 program
-  .version('0.1.0')
   .command('init')
+  .version('0.1.0')
   .description('Init rc file in ~')
   .action(() => {
     shell.touch(RC_PATH);
@@ -199,7 +198,6 @@ program
   });
 
 program
-  .version('0.1.0')
   .command('ls')
   .description('List all entries')
   .action((opts) => {
@@ -207,7 +205,6 @@ program
   });
 
 program
-  .version('0.1.0')
   .command('add')
   .description('Add an entry')
   .argument('<alias>')
@@ -217,7 +214,6 @@ program
   });
 
 program
-  .version('0.1.0')
   .command('rm')
   .description('Remove an entry')
   .argument('<alias>')
@@ -225,18 +221,15 @@ program
     rmEntry(alias);
   });
 
-program
-  .version('0.1.0')
-  .argument('<alias>')
-  .action((alias) => {
-    const entry = findEntry(alias);
+program.argument('<alias>').action((alias) => {
+  const entry = findEntry(alias);
 
-    if (!entry) {
-      console.log(`Did not find an entry with the alias ${alias}`);
-      return;
-    }
+  if (!entry) {
+    console.log(`Did not find an entry with the alias ${alias}`);
+    return;
+  }
 
-    opn(entry.url);
-  });
+  opn(entry.url);
+});
 
 program.parse(process.argv);
