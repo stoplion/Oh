@@ -1,4 +1,4 @@
-![logo](./images/logo.png)
+![logo](https://raw.githubusercontent.com/stoplion/oh/main/images/logo.png)
 
 # Command Line Bookmarking
 

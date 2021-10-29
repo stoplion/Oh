@@ -1,5 +1,7 @@
 import { getEntries, tableLogEntries } from './utils.js';
 
+import colors from 'colors';
+
 export function search(keyword, opts) {
   let foundEntries = [];
 

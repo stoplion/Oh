@@ -1,4 +1,5 @@
 import { RC_PATH } from '../constants.js';
+import colors from 'colors';
 import fs from 'fs';
 import { getEntries } from './utils.js';
 import isUrl from 'is-url';
@@ -6,7 +7,7 @@ import prependHTTP from 'prepend-http';
 
 export function addNewEntry(alias, url, tags) {
   if (!isUrl(prependHTTP(url))) {
-    console.log(`Not an URL: ${url}`);
+    console.log(colors.red(`Not an URL: ${url}`));
     return;
   }
 
@@ -21,7 +22,7 @@ export function addNewEntry(alias, url, tags) {
   const match = rcEntries.find((entry) => entry.alias === alias);
 
   if (match) {
-    console.log(`Alias ${alias} has already been`);
+    console.log(colors.red(`Alias ${alias} has already been`));
     return;
   }
 
@@ -29,7 +30,5 @@ export function addNewEntry(alias, url, tags) {
 
   fs.writeFileSync(RC_PATH, JSON.stringify(rcEntries));
 
-  console.log(`
-    Added ${alias} entry pointing to ${url}.
-  `);
+  console.log(colors.green(`Added ${alias} entry pointing to ${url}.`));
 }

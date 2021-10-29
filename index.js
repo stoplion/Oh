@@ -2,6 +2,7 @@
 
 import { RC_PATH } from './constants.js';
 import { addNewEntry } from './functions/addNewEntry.js';
+import colors from 'colors';
 import { lsEntries } from './functions/lsEntries.js';
 import { lsTags } from './functions/lsTags.js';
 import opn from 'better-opn';
@@ -19,12 +20,17 @@ program
   .argument('<alias>')
   .argument('<tags...>')
   .action((alias, tags) => {
-    tagEntry(alias, tags);
-    console.log(
-      `${alias} updated with tags: ${tags
-        .map((tag) => tag.toLowerCase())
-        .join(', ')}`
-    );
+    if (tagEntry(alias, tags)) {
+      console.log(
+        colors.green(
+          `${alias} updated with tags: ${tags
+            .map((tag) => tag.toLowerCase())
+            .join(', ')}`
+        )
+      );
+    } else {
+      console.log(colors.red(`alias: "${alias}" not found`));
+    }
   });
 
 program
@@ -35,7 +41,7 @@ program
   .argument('<tag>')
   .action((alias, tag) => {
     untagEntry(alias, tag);
-    console.log(`${tag} removed from alias: ${alias}.`);
+    console.log(colors.green(`${tag} removed from alias: ${alias}.`));
   });
 
 program
@@ -62,7 +68,7 @@ program
   .action(() => {
     shell.touch(RC_PATH);
     shell.exec(`echo [] >> ${RC_PATH}`);
-    console.log(`.ohrc file inited at ${RC_PATH}`);
+    console.log(colors.green(`.ohrc file inited at ${RC_PATH}`));
   });
 
 program
