@@ -120,12 +120,14 @@ function search(keyword, opts) {
       return entry.tags.includes(keyword);
     });
 
-    const table = new Table({
-      head: ['alias', 'url', 'tags'],
-    });
-
     tableLogEntries(foundEntries);
   } else {
+    foundEntries = getEntries().filter((entry) => {
+      const entryAlias = entry.alias;
+      const entryUrl = entry.url;
+      if (entryUrl)
+      // entry.tags.includes(keyword);
+    });
     // @TODO search by alias or url
   }
 }

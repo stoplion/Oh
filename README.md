@@ -13,6 +13,7 @@
 ```
 // Kick it off by initializing
 
+$ npm install -g @stoplion/oh
 $ oh init
 ```
 
@@ -78,11 +79,12 @@ $ oh tag red reading news
 
 ## Features coming soon
 
-- Filter search by tag
-- Open with other browsers
-- Open with incognito
-- Open with different profiles
-- Interactive modes
+- [x] Filter search by tag
+- [ ] Filter search by url and alias
+- [ ] Open with other browsers
+- [ ] Open with incognito
+- [ ] Open with different profiles
+- [ ] Autocomplete
 
 # Made with opensource
 
