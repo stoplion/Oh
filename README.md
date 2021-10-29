@@ -1,3 +1,5 @@
+![logo](./images/logo.png)
+
 # Command Line Bookmarking
 
 [![Image from Gyazo](https://i.gyazo.com/02ce5034be5bce22c096387bc2480ed4.gif)](https://gyazo.com/02ce5034be5bce22c096387bc2480ed4)
@@ -21,10 +23,15 @@ $ oh init
 // Add some bookmarks with aliases
 // oh add <alias> <url>
 
-$ oh add g google.com
-$ oh add hn https://news.ycombinator.com/
 $ oh add red https://reddit.com/
-$ oh add trel https://trello.com/
+// add a new entry with the alias 'red'
+
+$ oh add g google.com -t search
+// add a new entry with a tag
+
+$ oh add hn https://news.ycombinator.com/ -t news code reading
+// add a new entry with several tags
+
 ```
 
 ```
@@ -73,6 +80,13 @@ $ oh tag red reading news
 ├───────┼───────────────────────────────┼───────────────┤
 │ trel  │ https://trello.com/           │               │
 └───────┴───────────────────────────────┴───────────────┘
+```
+
+```
+// Remove a tag
+
+// Removes the 'news' tag from the 'hn' entry
+$ oh untag hn news
 ```
 
 ```
