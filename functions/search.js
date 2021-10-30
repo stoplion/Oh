@@ -5,21 +5,17 @@ import colors from 'colors';
 export function search(keyword, opts) {
   let foundEntries = [];
 
-  if (opts.tags) {
-    // oh s -t work reading
-    // @TODO handle multiple tags
-    foundEntries = getEntries().filter((entry) => {
-      const entriesTags = entry.tags;
-      return entry.tags.includes(keyword);
-    });
+  const prop = Object.keys(opts)[0];
 
-    if (foundEntries.length === 0) {
-      console.log(`No search results for: ${keyword}`);
-      return;
-    }
+  foundEntries = getEntries().filter((entry) => {
+    return entry[prop].includes(keyword);
+  });
 
-    tableLogEntries(foundEntries);
-  } else {
-    // @TODO search by alias or url
+  if (foundEntries.length === 0) {
+    console.log(`No search results for: ${keyword}`);
+    return;
   }
+
+  console.log(colors.green(`Search results for ${prop}: ${keyword}`));
+  tableLogEntries(foundEntries);
 }

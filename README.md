@@ -29,10 +29,15 @@ $ oh add red https://reddit.com/
 $ oh add g google.com -t search
 // add a new entry with a tag
 
+
+$ oh add g google.com -t search
+// add a new entry with a tag
+
 $ oh add hn https://news.ycombinator.com/ -t news code reading
 // add a new entry with several tags
 
 ```
+![Image from Gyazo](https://i.gyazo.com/2fc19b5a1696bf36670925aeaf42b159.gif)](https://gyazo.com/2fc19b5a1696bf36670925aeaf42b159)
 
 ```
 // Last all your bookmarks
@@ -116,17 +121,43 @@ $  oh search -t news
 
 ```
 
+```
+// Search for bookmark by url
+$ oh search -u trel
+
+┌───────┬─────────────────────┬──────┐
+│ alias │ url                 │ tags │
+├───────┼─────────────────────┼──────┤
+│ trel  │ https://trello.com/ │      │
+└───────┴─────────────────────┴──────┘
+
+```
+
+```
+// Search for bookmark via alias
+
+$ oh search -a red
+
+┌───────┬─────────────────────┬───────────────┐
+│ alias │ url                 │ tags          │
+├───────┼─────────────────────┼───────────────┤
+│ red   │ https://reddit.com/ │ reading, news │
+└───────┴─────────────────────┴───────────────┘
+
+```
+
 ---
 
 ## Features coming soon
 
 ```
 - [x] Filter search by tag
-- [ ] Filter search by url and alias
-- [ ] Open with other browsers
-- [ ] Open with incognito
+- [x] Filter search by url and alias
+- [ ] Open with browsers other than Chrome
+- [ ] Open in Incognito
 - [ ] Open with different profiles
 - [ ] Autocomplete
+- [ ] Open all urls in 'project'
 ```
 
 # Made with opensource

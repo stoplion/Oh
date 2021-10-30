@@ -55,10 +55,12 @@ program
   .command('search')
   .alias('s')
   .argument('<keyword>')
-  .option('-t, --tags', 'Only list tags')
+  .option('-t, --tags', 'Search by tags')
+  .option('-u, --url', 'Search by url')
+  .option('-a, --alias', 'Search by alias')
   .description('Search for an entry')
-  .action((keyword, tags) => {
-    search(keyword, tags);
+  .action((keyword, opts) => {
+    search(keyword, opts);
   });
 
 program
