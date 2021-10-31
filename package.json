@@ -1,12 +1,13 @@
 {
   "name": "@stoplion/oh",
-  "version": "1.0.34",
+  "version": "1.0.38",
   "description": "Command Line Bookmarking",
   "main": "index.js",
   "homepage": "https://github.com/stoplion/Oh",
   "url": "https://github.com/stoplion/Oh",
   "scripts": {
-    "pub": "git push origin head -f && npm publish --access public"
+    "pub": "git push origin head -f && npm publish --access public",
+    "npmpage": "open https://www.npmjs.com/package/@stoplion/oh"
   },
   "bin": {
     "oh": "./index.js"

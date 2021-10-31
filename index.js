@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { Option, program } from 'commander';
+
 import { RC_PATH } from './constants.js';
 import { addNewEntry } from './functions/addNewEntry.js';
 import colors from 'colors';
@@ -8,12 +10,12 @@ import { lsEntries } from './functions/lsEntries.js';
 import { lsTags } from './functions/lsTags.js';
 import open from 'open';
 import opn from 'better-opn';
-import { program } from 'commander';
 import { rmEntry } from './functions/rmEntry.js';
 import { search } from './functions/search.js';
 import shell from 'shelljs';
 import { tagEntry } from './functions/tagEntry.js';
 import { untagEntry } from './functions/untagEntry.js';
+
 program
   .command('tag')
   .alias('t')
@@ -99,15 +101,39 @@ program
     rmEntry(alias);
   });
 
-program.argument('<alias>').action((alias) => {
-  const entry = findEntry(alias);
+// oh gh --chrome
+//
+program
+  .argument('<alias>')
+  .addOption(
+    new Option('-b, --browser <browser>', 'Open in specfic browser').choices([
+      'chrome',
+      'firefox',
+      'edge',
+    ])
+  )
+  .action((alias, opts) => {
+    const entry = findEntry(alias);
 
-  if (!entry) {
-    console.log(`Did not find an entry with the alias ${alias}`);
-    return;
-  }
+    if (!entry) {
+      console.log(`Did not find an entry with the alias ${alias}`);
+      return;
+    }
 
-  open(entry.url);
-});
+    const browser = (function() {
+      switch (opts.browser) {
+        case 'firefox':
+          return 'firefox';
+        case 'edge':
+          return 'edge';
+        default:
+          return 'google chrome';
+      }
+    })();
+
+    const openProps = { app: { name: browser } };
+
+    open(entry.url, openProps);
+  });
 
 program.parse(process.argv);

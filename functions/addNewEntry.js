@@ -5,7 +5,7 @@ import { getEntries } from './utils.js';
 import isUrl from 'is-url';
 import prependHTTP from 'prepend-http';
 
-export function addNewEntry(alias, url, tags) {
+export function addNewEntry(alias, url, tags = []) {
   if (!isUrl(prependHTTP(url))) {
     console.log(colors.red(`Not an URL: ${url}`));
     return;

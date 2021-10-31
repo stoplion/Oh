@@ -37,7 +37,8 @@ $ oh add hn https://news.ycombinator.com/ -t news code reading
 // add a new entry with several tags
 
 ```
-![Image from Gyazo](https://i.gyazo.com/2fc19b5a1696bf36670925aeaf42b159.gif)](https://gyazo.com/2fc19b5a1696bf36670925aeaf42b159)
+
+![Image from Gyazo](https://i.gyazo.com/2fc19b5a1696bf36670925aeaf42b159.gif)]
 
 ```
 // Last all your bookmarks
@@ -64,6 +65,15 @@ $ oh red
 $ oh g
 $ oh trel
 $ oh hn
+```
+
+```
+// Open in specific browser
+// oh <alias> --browser [chrome, edge, firefox]
+
+$ oh gh --browser chrome
+$ oh gh --browser firefox
+$ oh gh --browser edge
 ```
 
 ```
@@ -153,7 +163,7 @@ $ oh search -a red
 ```
 - [x] Filter search by tag
 - [x] Filter search by url and alias
-- [ ] Open with browsers other than Chrome
+- [x] Open with browsers other than Chrome
 - [ ] Open in Incognito
 - [ ] Open with different profiles
 - [ ] Autocomplete
