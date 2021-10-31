@@ -1,6 +1,6 @@
 {
   "name": "@stoplion/oh",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "description": "Command Line Bookmarking",
   "main": "index.js",
   "homepage": "https://github.com/stoplion/Oh",
@@ -27,7 +27,7 @@
     "commander": "^8.2.0",
     "is-url": "^1.2.4",
     "lodash": "^4.17.21",
-    "open": "^8.2.1",
+    "open": "^8.4.0",
     "prepend-http": "^4.0.0",
     "shelljs": "^0.8.4"
   }

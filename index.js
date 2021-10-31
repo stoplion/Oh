@@ -3,8 +3,10 @@
 import { RC_PATH } from './constants.js';
 import { addNewEntry } from './functions/addNewEntry.js';
 import colors from 'colors';
+import { findEntry } from './functions/findEntry.js';
 import { lsEntries } from './functions/lsEntries.js';
 import { lsTags } from './functions/lsTags.js';
+import open from 'open';
 import opn from 'better-opn';
 import { program } from 'commander';
 import { rmEntry } from './functions/rmEntry.js';
@@ -12,7 +14,6 @@ import { search } from './functions/search.js';
 import shell from 'shelljs';
 import { tagEntry } from './functions/tagEntry.js';
 import { untagEntry } from './functions/untagEntry.js';
-
 program
   .command('tag')
   .alias('t')
@@ -106,7 +107,7 @@ program.argument('<alias>').action((alias) => {
     return;
   }
 
-  opn(entry.url);
+  open(entry.url);
 });
 
 program.parse(process.argv);
